@@ -96,6 +96,15 @@ case "$1" in
      test_run
      echo $?
      ;;
+  poke)
+     cur_time=$(date +%Y-%m-%d:%H:%M:%S)
+     if ! test_run; then
+       echo "[$cur_time $0] found mcserver tmux stopped, restarting"
+       start_from_path $DEFAULT_JAR
+     else
+       echo "[$cur_time] regular check server status, running"
+     fi
+     ;;
   *)
-     echo "usage: $0 status|stop|start [relative mc path to base]"
+     echo "usage: $0  status|stop|start [relative mc path to base]"
 esac
